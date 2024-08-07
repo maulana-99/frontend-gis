@@ -32,7 +32,11 @@ export default {
           throw new Error('Network response was not ok');
         }
         const data = await response.json();
-        this.albums = data;
+        if (data.success) {
+          this.albums = data.data.albums;
+        } else {
+          this.error = data.message;
+        }
       } catch (error) {
         this.error = error.message;
       } finally {
@@ -55,3 +59,4 @@ li {
   color: red;
 }
 </style>
+\
